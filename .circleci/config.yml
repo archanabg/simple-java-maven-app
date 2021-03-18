@@ -11,7 +11,8 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
             - v1-dependencies-
-      - run: ./mvnw -Dmaven.test.skip=true package
+      - run: mvn clean install --settings settings.xml -Dmaven.test.skip=true
+
       - save_cache:
             paths:
               - ~/.m2
@@ -31,7 +32,7 @@ jobs:
             - v1-dependencies-
       - attach_workspace:
           at: ./target
-      - run: ./mvnw test
+      - run: mvn test
 
 
         
